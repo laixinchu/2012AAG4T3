@@ -1,0 +1,4 @@
+16:52:42,725  INFO HelloWorld:21 - Sample info message
+16:52:42,725  WARN HelloWorld:22 - Sample warn message
+16:52:42,725 ERROR HelloWorld:23 - Sample error message
+16:52:42,725 FATAL HelloWorld:24 - Sample fatal message
