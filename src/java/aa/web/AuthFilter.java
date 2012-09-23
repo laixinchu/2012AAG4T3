@@ -17,7 +17,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logger.HelloWorld;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -146,8 +145,6 @@ public class AuthFilter implements Filter {
         String initParameter = filterConfig.getInitParameter("exclude");
         exclude = initParameter.split(",");
         PropertyConfigurator.configure(filterConfig.getServletContext().getRealPath("/WEB-INF/classes/log4j.properties"));
-        RollingFileAppender r = new RollingFileAppender();
-        r=(RollingFileAppender)Logger.getRootLogger().getAppender("myAppender");
     }
 
     /**
