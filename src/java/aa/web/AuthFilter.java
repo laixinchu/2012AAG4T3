@@ -50,7 +50,9 @@ public class AuthFilter implements Filter {
         
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        
+
+        long timeIn = System.currentTimeMillis();
+                
         String servletPath = req.getServletPath();
         boolean isExclude = false;
         for (String ex : AuthFilter.exclude) {
@@ -98,6 +100,9 @@ public class AuthFilter implements Filter {
             }
             sendProcessingError(problem, response);
         }
+        
+        System.out.println("Request from " + req.getRemoteHost() + " to " + req.getServletPath());
+        System.out.println("Time taken: " + (System.currentTimeMillis() - timeIn) + " milliseconds");
     }
 
     /**
