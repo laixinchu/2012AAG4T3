@@ -14,10 +14,6 @@
     <title>Buy Success</title>
 
 <%
-        // only authenticated users can see this page
-        if (session.getAttribute("authenticatedUser")==null){
-             %> <jsp:forward page = "login.jsp" /> <%
-        }
         String userId = (String) session.getAttribute("userId");
         String stock = (String)session.getAttribute("stock");
         String bidPrice = (String)session.getAttribute("bidprice");

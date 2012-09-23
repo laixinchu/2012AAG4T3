@@ -1,9 +1,3 @@
-<%-- 
-    Document   : logout
-    Created on : Aug 30, 2012, 11:26:55 AM
-    Author     : the saboteur
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
