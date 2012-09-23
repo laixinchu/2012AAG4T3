@@ -17,6 +17,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logger.HelloWorld;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.RollingFileAppender;
 
 /**
  *
@@ -25,6 +30,7 @@ import javax.servlet.http.HttpSession;
 public class AuthFilter implements Filter {
     
     private static final boolean debug = true;
+    private static final Logger logger = Logger.getLogger(AuthFilter.class);
     private static String [] exclude;
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
@@ -101,8 +107,8 @@ public class AuthFilter implements Filter {
             sendProcessingError(problem, response);
         }
         
-        System.out.println("Request from " + req.getRemoteHost() + " to " + req.getServletPath());
-        System.out.println("Time taken: " + (System.currentTimeMillis() - timeIn) + " milliseconds");
+        logger.info("Request from " + req.getRemoteHost() + " to " + req.getServletPath());
+        logger.info("Time taken: " + (System.currentTimeMillis() - timeIn) + " milliseconds");
     }
 
     /**
@@ -139,6 +145,9 @@ public class AuthFilter implements Filter {
         }
         String initParameter = filterConfig.getInitParameter("exclude");
         exclude = initParameter.split(",");
+        PropertyConfigurator.configure(filterConfig.getServletContext().getRealPath("/WEB-INF/classes/log4j.properties"));
+        RollingFileAppender r = new RollingFileAppender();
+        r=(RollingFileAppender)Logger.getRootLogger().getAppender("myAppender");
     }
 
     /**
