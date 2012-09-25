@@ -76,7 +76,13 @@ public class ProcessBuy extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session = request.getSession();
-
+        ExchangeBean eb;
+        if(request.getServletContext().getAttribute("exchangeBean") == null){
+            eb = new ExchangeBean();
+            request.getServletContext().setAttribute("exchangeBean", eb);
+        }else{
+            eb = (ExchangeBean)request.getServletContext().getAttribute("exchangeBean");
+        }
         String userId = (String) session.getAttribute("userId");
         String stock = request.getParameter("stock").trim();
         session.setAttribute("stock", stock);
@@ -86,7 +92,7 @@ public class ProcessBuy extends HttpServlet {
 
         // submit the buy request
         Bid newBid = new Bid(stock, bidPrice, userId);
-        ExchangeBean eb = new ExchangeBean();
+      
         boolean bidIsAccepted = eb.placeNewBidAndAttemptMatch(newBid);
 
         // forward to either buySuccess or buyFail depending on returned result

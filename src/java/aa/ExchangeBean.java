@@ -14,8 +14,8 @@ public class ExchangeBean {
 
   // used for keeping track of unfulfilled asks and bids in the system.
   // once asks or bids are matched, they must be removed from these arraylists.
-  private static ArrayList<Ask> unfulfilledAsks = new ArrayList<Ask>();
-  private static ArrayList<Bid> unfulfilledBids = new ArrayList<Bid>();
+  private ArrayList<Ask> unfulfilledAsks = new ArrayList<Ask>();
+  private ArrayList<Bid> unfulfilledBids = new ArrayList<Bid>();
 
   // used to keep track of all matched transactions (asks/bids) in the system
   // matchedTransactions is cleaned once the records are written to the log file successfully
