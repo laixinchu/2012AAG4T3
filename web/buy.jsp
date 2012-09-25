@@ -31,7 +31,7 @@
     </head>
 
     <BODY OnLoad="document.myform.bidprice.focus();">
-        <FORM name="myform" METHOD=POST ACTION="processBuy.jsp" onsubmit="return checkForm(this)">
+        <FORM name="myform" METHOD=POST ACTION="ProcessBuy" onsubmit="return checkForm(this)">
             <table border="1">
                 <thead>
                     <tr>
