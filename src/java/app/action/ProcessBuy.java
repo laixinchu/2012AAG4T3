@@ -4,12 +4,12 @@
  */
 package app.action;
 
+import aa.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 /**
  *
@@ -35,13 +35,13 @@ public class ProcessBuy extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProcessBuy</title>");            
+            out.println("<title>Servlet ProcessBuy</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProcessBuy at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally {
             out.close();
         }
     }
@@ -74,7 +74,39 @@ public class ProcessBuy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        HttpSession session = request.getSession();
+        ExchangeBean eb;
+        if(request.getServletContext().getAttribute("exchangeBean") == null){
+            eb = new ExchangeBean();
+            request.getServletContext().setAttribute("exchangeBean", eb);
+        }else{
+            eb = (ExchangeBean)request.getServletContext().getAttribute("exchangeBean");
+        }
+        String userId = (String) session.getAttribute("userId");
+        String stock = request.getParameter("stock").trim();
+        session.setAttribute("stock", stock);
+        String tempBidPrice = request.getParameter("bidprice").trim();
+        session.setAttribute("bidprice", tempBidPrice);
+        int bidPrice = Integer.parseInt(tempBidPrice);
+
+        // submit the buy request
+        Bid newBid = new Bid(stock, bidPrice, userId);
+      
+        boolean bidIsAccepted = eb.placeNewBidAndAttemptMatch(newBid);
+
+        // forward to either buySuccess or buyFail depending on returned result
+        RequestDispatcher rd;
+        if (bidIsAccepted) {
+            rd = request.getRequestDispatcher("buySuccess.jsp");
+            rd.forward(request, response);
+
+        } else {
+            rd = request.getRequestDispatcher("buyFail.jsp");
+            rd.forward(request, response);
+        }
+
+
     }
 
     /**

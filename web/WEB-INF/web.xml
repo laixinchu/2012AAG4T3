@@ -14,12 +14,12 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <servlet>
-        <servlet-name>ProcessSell</servlet-name>
-        <servlet-class>app.action.ProcessSell</servlet-class>
+        <servlet-name>ProcessBuy</servlet-name>
+        <servlet-class>app.action.ProcessBuy</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProcessSell</servlet-name>
-        <url-pattern>/ProcessSell</url-pattern>
+        <servlet-name>ProcessBuy</servlet-name>
+        <url-pattern>/ProcessBuy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
