@@ -13,6 +13,6 @@ session.setAttribute("authenticatedUser", null);
     </head>
     <body>
         You have successfully logged out. <br/>
-        Click <a href="login.jsp">here</a> to log in again.
+        Click <a href="login.html">here</a> to log in again.
     </body>
 </html>

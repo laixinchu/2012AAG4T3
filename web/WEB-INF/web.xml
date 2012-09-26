@@ -5,7 +5,7 @@
         <filter-class>aa.web.AuthFilter</filter-class>
         <init-param>
             <param-name>exclude</param-name>
-            <param-value>/staticpages/*,/login.jsp,/current.jsp,/index.jsp,/processLogin.jsp</param-value>
+            <param-value>/staticpages/*,/login.html,/current.jsp,/index.html,/ProcessLogin</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -17,9 +17,25 @@
         <servlet-name>ProcessBuy</servlet-name>
         <servlet-class>app.action.ProcessBuy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessLogin</servlet-name>
+        <servlet-class>app.action.ProcessLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessBuy</servlet-name>
         <url-pattern>/ProcessBuy</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProcessSell</servlet-name>
+        <servlet-class>app.action.ProcessSell</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessSell</servlet-name>
+        <url-pattern>/ProcessSell</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessLogin</servlet-name>
+        <url-pattern>/ProcessLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -27,6 +43,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

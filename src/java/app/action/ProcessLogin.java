@@ -6,21 +6,18 @@ package app.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import aa.*;
-import javax.servlet.RequestDispatcher;
-
-        
 
 /**
  *
  * @author hanxiang.ng.2010
  */
-public class ProcessSell extends HttpServlet {
+public class ProcessLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,16 +34,15 @@ public class ProcessSell extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-           
-            /* TODO output your page here. You may use following sample code. 
+            /* TODO output your page here. You may use following sample code.
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Process Sell</title>");            
+            out.println("<title>Process Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProcessSell at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ProcessLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
-            out.println("</html>");  */
+            out.println("</html>");*/
         } finally {            
             out.close();
         }
@@ -81,28 +77,14 @@ public class ProcessSell extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         HttpSession session = request.getSession(true);
-            ExchangeBean eb;
-            if(request.getServletContext().getAttribute("exchangeBean") == null){
-                eb = new ExchangeBean();
-                request.getServletContext().setAttribute("exchangeBean", eb);
-           }else{
-               eb = (ExchangeBean)request.getServletContext().getAttribute("exchangeBean");
-           }
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userId",request.getParameter("id").trim());
+            session.setAttribute("authenticatedUser",true);
             
-            String userId = (String) session.getAttribute("userId");
-            String stock = request.getParameter("stock").trim();
-            session.setAttribute("stock",stock);
-            String tempAskPrice = request.getParameter("askprice").trim();
-            session.setAttribute("askprice", tempAskPrice);
-            int askPrice = Integer.parseInt(tempAskPrice);
-
-            // submit the sell request
-            Ask newAsk = new Ask(stock, askPrice, userId);
-            //exchangeBean.placeNewAskAndAttemptMatch(newAsk);
             RequestDispatcher rd;
-            rd = request.getRequestDispatcher("sellSuccess.jsp");
+            rd = request.getRequestDispatcher("loginSuccess.jsp");
             rd.forward(request, response);
+     
     }
 
     /**
