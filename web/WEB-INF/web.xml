@@ -13,6 +13,14 @@
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+    <servlet>
+        <servlet-name>ProcessSell</servlet-name>
+        <servlet-class>app.action.ProcessSell</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessSell</servlet-name>
+        <url-pattern>/ProcessSell</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
